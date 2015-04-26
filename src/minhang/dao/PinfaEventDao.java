@@ -54,10 +54,13 @@ public class PinfaEventDao {
 		try {
 			for (int i = 7; i >= 0; i--) {
 				// mysql
-				sql = basesql + "date_sub('" + date + "',interval " + i
-						+ " day)";
-				// oracle
-				// sql = basesql + "to_date('" + date + "','yyyy-mm-dd')-" + i;
+				if (GlobalConstant.DBTYPE == 2) {
+					sql = basesql + "date_sub('" + date + "',interval " + i
+							+ " day)";
+				} else {
+					// oracle
+					sql = basesql + "to_date('" + date + "','yyyy-mm-dd')-" + i;
+				}
 				Statement stmt = c.createStatement();
 				ResultSet rs = stmt.executeQuery(sql);
 				Date dayDate = new Date();
@@ -138,10 +141,13 @@ public class PinfaEventDao {
 		try {
 			for (int i = 7; i >= 0; i--) {
 				// mysql
-				// sql = basesql + "date_sub('" + date + "',interval " + i
-				// + " day)";
-				// oracle
-				sql = basesql + "to_date('" + date + "','yyyy-mm-dd')-" + i;
+				if (GlobalConstant.DBTYPE == 2) {
+					sql = basesql + "date_sub('" + date + "',interval " + i
+							+ " day)";
+				} else {
+					// oracle
+					sql = basesql + "to_date('" + date + "','yyyy-mm-dd')-" + i;
+				}
 				Statement stmt = c.createStatement();
 				ResultSet rs = stmt.executeQuery(sql);
 				int num = 0;
@@ -168,16 +174,18 @@ public class PinfaEventDao {
 		List<Totalbase> results = new ArrayList<Totalbase>();
 		Totalbase totalbase = null;
 		/** mysql */
-		String basesql = "select * from totalbase where " + colName + "= '"
-				+ dimvalue + "' and  fashengriqi ='"
-				+ new java.sql.Date(day.getTime()) + "'";
-
-		/** oracle */
-		// String basesql = "select * from totalbase where " + colName + "= '"
-		// + dimvalue + "' and  to_char(fashengriqi,'YYYY-MM-DD') ='"
-		// + new java.sql.Date(day.getTime()) + "'";
-		// select * from mytable where to_char(install_date,'YYYYMMDD') >
-		// '20050101'
+		if (GlobalConstant.DBTYPE == 2) {
+			String basesql = "select * from totalbase where " + colName + "= '"
+					+ dimvalue + "' and  fashengriqi ='"
+					+ new java.sql.Date(day.getTime()) + "'";
+		} else {
+			/** oracle */
+			String basesql = "select * from totalbase where " + colName + "= '"
+					+ dimvalue + "' and  to_char(fashengriqi,'YYYY-MM-DD') ='"
+					+ new java.sql.Date(day.getTime()) + "'";
+			// select * from mytable where to_char(install_date,'YYYYMMDD') >
+			// '20050101'
+		}
 		try {
 			Statement stmt = c.createStatement();
 			ResultSet rs = stmt.executeQuery(basesql);
@@ -242,11 +250,13 @@ public class PinfaEventDao {
 		try {
 			for (int i = 7; i >= 0; i--) {
 				/** mysql */
-				sql = basesql + "date_sub('" + date + "',interval " + i
-						+ " day)";
-				/** oracle */
-				// sql = basesql + "to_date('" + date
-				// + "','yyyy-mm-dd')-"+i;
+				if (GlobalConstant.DBTYPE == 2) {
+					sql = basesql + "date_sub('" + date + "',interval " + i
+							+ " day)";
+				} else {
+					/** oracle */
+					sql = basesql + "to_date('" + date + "','yyyy-mm-dd')-" + i;
+				}
 				Statement stmt = c.createStatement();
 				ResultSet rs = stmt.executeQuery(sql);
 				Date dayDate = new Date();
@@ -334,11 +344,13 @@ public class PinfaEventDao {
 		try {
 			for (int i = 7; i >= 0; i--) {
 				/** mysql */
-				sql = basesql + "date_sub('" + date + "',interval " + i
-						+ " day)";
-				/** oracle */
-				// sql = basesql + "to_date('" + date
-				// + "','yyyy-mm-dd')-"+i;
+				if (GlobalConstant.DBTYPE == 2) {
+					sql = basesql + "date_sub('" + date + "',interval " + i
+							+ " day)";
+				} else {
+					/** oracle */
+					sql = basesql + "to_date('" + date + "','yyyy-mm-dd')-" + i;
+				}
 				Statement stmt = c.createStatement();
 				ResultSet rs = stmt.executeQuery(sql);
 				int num = 0;
@@ -366,15 +378,18 @@ public class PinfaEventDao {
 		List<Totalbase> results = new ArrayList<Totalbase>();
 		Totalbase totalbase = null;
 		/** mysql */
-		String basesql = "select * from totalbase where " + colName1 + "= '"
-				+ dimvalue1 + "' and " + colName2 + "= '" + dimvalue2
-				+ "' and  fashengriqi ='" + new java.sql.Date(day.getTime())
-				+ "'";
-		/** oracle */
-		// String basesql = "select * from totalbase where " + colName1 + "= '"
-		// + dimvalue1 + "' and " + colName2 + "= '" + dimvalue2
-		// + "' and  to_char(fashengriqi,'YYYY-MM-DD') ='"
-		// + new java.sql.Date(day.getTime()) + "'";
+		if (GlobalConstant.DBTYPE == 2) {
+			String basesql = "select * from totalbase where " + colName1
+					+ "= '" + dimvalue1 + "' and " + colName2 + "= '"
+					+ dimvalue2 + "' and  fashengriqi ='"
+					+ new java.sql.Date(day.getTime()) + "'";
+		} else {
+			/** oracle */
+			String basesql = "select * from totalbase where " + colName1
+					+ "= '" + dimvalue1 + "' and " + colName2 + "= '"
+					+ dimvalue2 + "' and  to_char(fashengriqi,'YYYY-MM-DD') ='"
+					+ new java.sql.Date(day.getTime()) + "'";
+		}
 		try {
 			Statement stmt = c.createStatement();
 			ResultSet rs = stmt.executeQuery(basesql);
