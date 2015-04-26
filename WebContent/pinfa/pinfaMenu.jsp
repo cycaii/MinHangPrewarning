@@ -1,29 +1,21 @@
-<%@ page language="java" contentType="text/html; charset=GBK"
-	pageEncoding="GBK"%>
-<!-- <h1 onClick="javascript:ShowMenu(this,0)"> -->
-<!-- 	<a href="javascript:void(0)">+ Ƶ���¼�</a> -->
-<!-- </h1> -->
-<!-- <span class="no"> -->
-<!-- 	<h2> -->
-<!-- 		<a href="pinfaEvent1.jsp" target="main"> һάƵ��</a> -->
-<!-- 	</h2> -->
-<!-- 	<h2> -->
-<!-- 		<a href="pinfaEvent2.jsp" target="main"> ��άƵ��</a> -->
-<!-- 	</h2> -->
-<!-- </span> -->
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+      pageEncoding="UTF-8"%> 
+<%-- <%@ page language="java" contentType="text/html; charset=GBK" --%>
+<!-- 	pageEncoding="GBK"%> -->
+ 
 <!-- <h1> -->
-<!-- 	<a href="pinfa_zhishu.jsp" target="main"> &nbsp; Ƶ��ָ��</a> -->
+<!-- 	<a href="pinfa_showPinfaZhishu.action" target="main"> &nbsp; 频发指数</a> -->
 <!-- </h1> -->
-<!-- BI�� -->
+<!-- BI版 -->
 <h1>
 	<a
 		href="http://localhost:9704/analytics/saw.dll?PortalPages&PortalPath=/shared/minhang/_portal/yiweipinfajisuan&NQUser=weblogic&NQPassword=Admin123"
-		target="main"> һάƵ��ָ��</a>
+		target="main"> 一维频发指数</a>
 </h1>
 <h1>
 	<a
 		href="http://localhost:9704/analytics/saw.dll?PortalPages&PortalPath=/shared/minhang/_portal/erweipinfajisuan&NQUser=weblogic&NQPassword=Admin123"
-		target="main"> ��άƵ��ָ��</a>
+		target="main"> 二维频发指数</a>
 </h1>
 <script language="JavaScript">
 <!--//

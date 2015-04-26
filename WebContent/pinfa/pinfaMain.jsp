@@ -1,5 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=GBK"
-	pageEncoding="GBK"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+      pageEncoding="UTF-8"%> 
+<%-- <%@ page language="java" contentType="text/html; charset=GBK" --%>
+<%-- 	pageEncoding="GBK"%> --%>
 <%@include file="/common/header.jsp"%>
 <%@page
 	import="minhang.dao.*,minhang.entity.*,java.util.*,minhang.service.*"%>
@@ -9,7 +11,7 @@
 <%@include file="/common/meta.jsp"%>
 <link href="${ctx}/css/Untitled-1.css" rel="stylesheet" type="text/css" />
 <link href="${ctx}/css/1-1.css" rel="stylesheet" type="text/css" />
-<title>民航不安全事件分析与预警系统</title>
+<title>姘戣埅涓嶅畨鍏ㄤ簨浠跺垎鏋愪笌棰勮绯荤粺</title>
 </head>
 
 <body>
@@ -24,15 +26,17 @@
 					<%@ include file="pinfaMenu.jsp"%>
 				</div>
 			</div>
-			<div id="main1">
-				<iframe name="main" scrolling="auto" frameborder="0"
-					src="pinfa_zhishu.jsp"></iframe>
-			</div>
-			<!-- 	 BI链接 -->
-			<!-- 			<div id="main1"> -->
-			<!-- 				<iframe name="main" scrolling="auto" frameborder="0" -->
-			<!-- 					src="http://localhost:9704/analytics/saw.dll?PortalPages&PortalPath=/shared/minhang/_portal/yiweipinfajisuan&NQUser=weblogic&NQPassword=Admin123"></iframe> -->
-			<!-- 			</div> -->
+<!-- 			<div id="main1"> -->
+<%-- 				<s:if test="frameContent=='pinfaZhishu'"> --%>
+<!-- 					<iframe name="main" scrolling="auto" frameborder="0" -->
+<!-- 						src="pinfa_showPinfaZhishu.action"></iframe> -->
+<%-- 				</s:if> --%>
+<!-- 			</div> -->
+			<!-- 	 BI閾炬帴 -->
+						<div id="main1">
+							<iframe name="main" scrolling="auto" frameborder="0"
+								src="http://localhost:9704/analytics/saw.dll?PortalPages&PortalPath=/shared/minhang/_portal/yiweipinfajisuan&NQUser=weblogic&NQPassword=Admin123"></iframe>
+						</div>
 		</div>
 	</div>
 

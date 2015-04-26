@@ -28,6 +28,10 @@
 			</result>
 			<result name="fail">login.jsp</result>
 		</action>
+		<action name="logout" class="minhang.action.LogoutAction">
+			<result name="success" type="redirect">login.action
+			</result>
+		</action>
 		<!-- 注销 -->
 		<!-- <action name="logout" class="com.pt.action.LogoutAction"> -->
 		<!-- <result name="success" type="redirect">index.action</result> -->
@@ -35,6 +39,13 @@
 
 		<action name="pinfa_*" method="{1}" class="minhang.action.PinfaAction">
 			<result name="success">pinfa/pinfaMain.jsp</result>
+			<result name="pinfaZhishu">pinfa/pinfa_zhishu.jsp</result>
+			<result name="login">login.jsp</result>
+		</action>
+
+		<action name="tongji_*" method="{1}" class="minhang.action.TongjiAction">
+			<result name="success">tongji/tongjiMain.jsp</result>
+			<result name="onedimTime">tongji/tongji_OnedimTime.jsp</result>
 			<result name="login">login.jsp</result>
 		</action>
 
@@ -47,7 +58,7 @@
 			<result name="oufaDetail">oufa/oufaEventDetail.jsp</result>
 			<result name="login">login.jsp</result>
 		</action>
-<action name="yujing_*" method="{1}" class="minhang.action.YujingAction">
+		<action name="yujing_*" method="{1}" class="minhang.action.YujingAction">
 			<result name="success">yujing/yujingMain.jsp</result>
 			<result name="yujing">yujing/yujing.jsp</result>
 			<result name="yuce">yujing/yuce.jsp</result>
@@ -66,9 +77,10 @@
 
 	<!-- 后台管理 -->
 	<package name="admin" namespace="/admin" extends="struts-default">
-		<!-- <action name="admin_*" method="{1}" class="AdminAction"> -->
-		<!-- <result name="success" type="redirect">/secure/home.jsp</result> -->
-		<!-- <result name="input">/login.jsp</result> -->
-		<!-- </action> -->
+		<action name="admin_*" method="{1}" class="minhang.action.AdminAction">
+			<result name="success" type="redirect">/userlist.jsp</result>
+			<result name="userlist">userlist.jsp</result>
+			<result name="login">admin-login.jsp</result>
+		</action>
 	</package>
 </struts>

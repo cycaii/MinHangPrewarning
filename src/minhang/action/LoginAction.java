@@ -34,7 +34,10 @@ public class LoginAction extends ActionSupport {
 			errinfo = "用户名或密码不正确";
 			return "fail";
 		}
-		
+		if (user.getState() == 1) {
+			errinfo = "账号被屏蔽";
+			return "fail";
+		}
 		ctx.getSession().put("username", username);
 		return SUCCESS;
 	}

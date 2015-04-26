@@ -30,7 +30,7 @@ public class OufaAction extends ActionSupport {
 			.getInstance();
 	private DimtypeDao dimtypeDao = DimtypeDao.getInstance();
 	private OuFaEventDao oufaDao = OuFaEventDao.getInstance();
-	private	PinfaEventDao pinfaEventDao = PinfaEventDao.getInstance();
+	private PinfaEventDao pinfaEventDao = PinfaEventDao.getInstance();
 	private List<String> dimStrs = null;
 	private List<PinfaEvent> pinfaList = null;
 
@@ -47,32 +47,32 @@ public class OufaAction extends ActionSupport {
 	private String dtype1Select;
 	private String dtype2Select;
 	private PinfaEvent PinfaEvent;
-	//偶发详情
+	// 偶发详情
 	private String dimtype;
-	private String	dimvalue;
-	private Date	day;
-	private int	dim;
+	private String dimvalue;
+	private Date day;
+	private int dim;
 	private String dimtype1;
-	private	String dimvalue1;
-	private String dimtype2  ;
-	private String dimvalue2 ;
+	private String dimvalue1;
+	private String dimtype2;
+	private String dimvalue2;
 	List<Totalbase> totals = null;
 	// 一维突发
 	private String[] years = GlobalConstant.years;
 	private String year;
 	private String accordingSel;
 	private String numSel;
-	private List<Onedimstatistic> tufaOneDimResults=null;
+	private List<Onedimstatistic> tufaOneDimResults = null;
 	// 二维突发
 	List<Twodimstatistic> tufaTwoDimResults = null;
-	
+
 	public String showOufaMain() throws Exception {
 		ActionContext ctx = ActionContext.getContext();
-		String username = (String) ctx.get("username");
-		 System.out.println("username:"+username);
-//		 if (username == null || username.equals("")) {
-//		 return LOGIN;
-//		 }
+		String username = (String) ctx.getSession().get("username");
+		System.out.println("username:" + username);
+		if (username == null || username.equals("")) {
+			return LOGIN;
+		}
 		if (frameContent == null || frameContent.equals(""))
 			frameContent = "oufaEvent1";
 		return SUCCESS;
@@ -126,35 +126,35 @@ public class OufaAction extends ActionSupport {
 		return frameContent;
 	}
 
-	
-	public String showOufaEventDetail(){
+	public String showOufaEventDetail() {
 		try {
-//			dimvalue=new String(dimvalue.getBytes("utf-8"));
-			dimvalue=new String(getDimvalue().getBytes("iso-8859-1"),"UTF-8");
+			// dimvalue=new String(dimvalue.getBytes("utf-8"));
+			dimvalue = new String(getDimvalue().getBytes("iso-8859-1"), "UTF-8");
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println("showOufaEventDetail-dimtype:" + dimtype + "  dimvalue:"
-				+ dimvalue+"  day:"+day+"  dim:"+dim);
-		
-		if (dim==1) {
+		System.out.println("showOufaEventDetail-dimtype:" + dimtype
+				+ "  dimvalue:" + dimvalue + "  day:" + day + "  dim:" + dim);
+
+		if (dim == 1) {
 			totals = pinfaEventDao.queryOneDimPinfaEventDetails(dimtype,
 					dimvalue, day);
-		} else if (dim==2) {
-			 dimtype1 = dimtype.split(" ")[0];
+		} else if (dim == 2) {
+			dimtype1 = dimtype.split(" ")[0];
 			dimvalue1 = dimvalue.split(" ")[0];
 			dimtype2 = dimtype.split(" ")[1];
 			dimvalue2 = dimvalue.split(" ")[1];
 			System.out.println("showOufaEventDetail-dimtype1:" + dimtype1
-					+ "  dimvalue1:" + dimvalue1 + "   dimtype2:"
-					+ dimtype2 + "  dimvalue2:" + dimvalue2);
+					+ "  dimvalue1:" + dimvalue1 + "   dimtype2:" + dimtype2
+					+ "  dimvalue2:" + dimvalue2);
 
 			totals = pinfaEventDao.queryTwoDimPinfaEventDetails(dimtype1,
 					dimvalue1, dimtype2, dimvalue2, day);
 		}
 		return "oufaDetail";
 	}
+
 	/**
 	 * 一维突发事件页面
 	 * 
@@ -162,8 +162,8 @@ public class OufaAction extends ActionSupport {
 	 * @throws Exception
 	 */
 	public String showTufaOneDim() throws Exception {
-		System.out.println("showTufaOneDim:dimtype:" + dimSelect + "  yearSel:" + year
-				+ "  according:" + accordingSel + "  num:" + numSel);
+		System.out.println("showTufaOneDim:dimtype:" + dimSelect + "  yearSel:"
+				+ year + "  according:" + accordingSel + "  num:" + numSel);
 
 		dimStrs = dimtypeDao.getAllDimtypesStr();
 
@@ -186,21 +186,23 @@ public class OufaAction extends ActionSupport {
 	 * @throws Exception
 	 */
 	public String showTufaTwoDim() throws Exception {
-		System.out.println("showTufaTwoDim:dimtype:"+dtype1Select+dtype2Select+"  yearSel:"+year +"  according:"+accordingSel+"  num:"+numSel);
+		System.out.println("showTufaTwoDim:dimtype:" + dtype1Select
+				+ dtype2Select + "  yearSel:" + year + "  according:"
+				+ accordingSel + "  num:" + numSel);
 		dimStrs = dimtypeDao.getAllDimtypesStr();
 
-		if(year !=null &&accordingSel!=null&&numSel!=null){
-			tufaTwoDimResults= oufaDao.queryTwoDimOufaEvent(dtype1Select, dtype2Select,year , accordingSel, numSel);
-		 if(tufaTwoDimResults==null||tufaTwoDimResults.size()==0){
-		msg = "您好，"+dtype1Select+" "+dtype2Select+year +"年第"+numSel+accordingSel+"没有突发事件";
-			} 
+		if (year != null && accordingSel != null && numSel != null) {
+			tufaTwoDimResults = oufaDao.queryTwoDimOufaEvent(dtype1Select,
+					dtype2Select, year, accordingSel, numSel);
+			if (tufaTwoDimResults == null || tufaTwoDimResults.size() == 0) {
+				msg = "您好，" + dtype1Select + " " + dtype2Select + year + "年第"
+						+ numSel + accordingSel + "没有突发事件";
+			}
 		}
 		frameContent = "tufaEvent2";
 		return frameContent;
 	}
-	
-	
-	 
+
 	public List<Onedimstatistic> getTufaOneDimResults() {
 		return tufaOneDimResults;
 	}
@@ -249,7 +251,6 @@ public class OufaAction extends ActionSupport {
 		this.numSel = numSel;
 	}
 
- 
 	public PinfaEvent getPinfaEvent() {
 		return PinfaEvent;
 	}
@@ -321,6 +322,7 @@ public class OufaAction extends ActionSupport {
 	public void setDtype2Select(String dtype2Select) {
 		this.dtype2Select = dtype2Select;
 	}
+
 	public String getDimtype() {
 		return dimtype;
 	}

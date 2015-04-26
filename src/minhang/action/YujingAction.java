@@ -40,11 +40,11 @@ public class YujingAction extends ActionSupport {
 
 	public String showYujingMain() throws Exception {
 		ActionContext ctx = ActionContext.getContext();
-		String username = (String) ctx.get("username");
+		String username = (String) ctx.getSession().get("username");
 		System.out.println("username:" + username);
-		// if (username == null || username.equals("")) {
-		// return LOGIN;
-		// }
+		 if (username == null || username.equals("")) {
+		 return LOGIN;
+		 }
 		if (frameContent == null || frameContent.equals(""))
 			frameContent = "yuce";
 		return SUCCESS;
