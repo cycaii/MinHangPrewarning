@@ -4,7 +4,7 @@
 <%-- 	pageEncoding="GBK"%> --%>
 <%@include file="/common/header.jsp"%>
 <%@page
-	import="minhang.dao.*,minhang.service.*,minhang.entity.*,minhang.util.*,minhang.algo.*,java.util.*,org.jfree.chart.*,org.jfree.chart.plot.*,org.jfree.chart.labels.*,
+	import="minhang.dao.*,minhang.entity.*,minhang.service.*,java.util.*,org.jfree.chart.*,org.jfree.chart.plot.*,org.jfree.chart.labels.*,
 org.jfree.data.category.*,org.jfree.data.general.DefaultPieDataset,org.jfree.ui.*,org.jfree.chart.renderer.category.BarRenderer3D,
 org.jfree.chart.servlet.*,org.jfree.chart.plot.PlotOrientation,org.jfree.data.general.DatasetUtilities"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -13,28 +13,46 @@ org.jfree.chart.servlet.*,org.jfree.chart.plot.PlotOrientation,org.jfree.data.ge
 <%@include file="/common/meta.jsp"%>
 <link href="${ctx}/resources/bootstrap/css/bootstrap.css"
 	rel="stylesheet">
+<%-- 	<link href="${ctx}/resources/bootstrap/css/bootstrap.min.css" --%>
+<!-- 	rel="stylesheet"> -->
 <title>民航不安全事件分析与预警系统</title>
-
 </head>
-
 <%
+	//set encoding
 	request.setCharacterEncoding("gbk");
 
 	//get common objects
-	CommonService c = new CommonService();
-	DimtypeDao d = DimtypeDao.getInstance();
-	OnedimstatisticDao od =  OnedimstatisticDao.getInstance();
-	List<String> dimStrs = d.getAllDimtypesStr();
+	CommonService c = (CommonService) application
+	.getAttribute("CommonService");
+	DimtypeDao d = (DimtypeDao) application.getAttribute("DimtypeDao");
+	TwodimstatisticDao od = (TwodimstatisticDao) application
+	.getAttribute("TwodimstatisticDao");
+	List<String> dimStrs = (List<String>) application
+	.getAttribute("dimTypeStrs");
+	String[][] valueStrs = (String[][]) application
+	.getAttribute("valueStrsArray");
+	List<String> diquStrs = (List<String>) application
+	.getAttribute("diquValueStrs");
 
 	//获取页面输入参数
-	String dimtype = request.getParameter("dimSelect");
+	String button1 = request.getParameter("fastButton");
+	System.out.println("=========================================");
+	System.out.println("button1:"+button1);
+	System.out.println("=========================================");
+	String dimtype1 = "",dimvalue1="",dimtype2="",dimvalue2="";
+	if(button1!=null)//一键分析
+	{
+	  dimtype1 = "发生地区";
+	 dimtype2 = "事件性质";
+	}else{
+	  dimtype1 = request.getParameter("dtype1Select");
+	  dimvalue1 = request.getParameter("dvalue1Select");
+	  dimtype2 = request.getParameter("dtype2Select");
+	  dimvalue2 = request.getParameter("dvalue2Select");}
 	String timeSel = request.getParameter("timeSelect");
-	String barGraphURL = null, pieGraphURL = null, lineGraphURL = null;
-	String startYear = null, endYear = null, startNum = null, endNum = null;
+	String barGraphURL = null, pieGraphURL = null,lineGraphURL = null;
+	String startYear =  request.getParameter("sy_year"), endYear = request.getParameter("ey_year"), startNum = null, endNum = null;
 
-	System.out.println("input:dimtype:"+dimtype+"  timeSel:"+timeSel);
-	startYear = request.getParameter("sy_year");
-	endYear = request.getParameter("ey_year");
 	//设置查询条件参数
 	if (timeSel != null) {
 		int sel = Integer.parseInt(timeSel);
@@ -61,52 +79,105 @@ org.jfree.chart.servlet.*,org.jfree.chart.plot.PlotOrientation,org.jfree.data.ge
 	startNum = request.getParameter("sw_week");
 	endNum = request.getParameter("ew_week");
 	break;
-		}
 		
-		System.out.println("input:startYear:"+startYear+"  endYear:"+endYear+"  startNum:"+startNum+"  endNum:"+endNum);
+		}
 		//数据处理
-		List<Onedimstatistic> result = c.getOneDimResult(sel,
-		dimtype, null, startYear, endYear, startNum, endNum);
+		List<Twodimstatistic> result = c.getTwoDimResult(sel,
+		dimtype1, dimvalue1, dimtype2, dimvalue2, startYear,
+		endYear, startNum, endNum);
+
 		//生成直方图
-		JFreeChart chart = c.getOneDimBarChart(dimtype, result);
+		JFreeChart chart = c.getTwoDimBarChart(dimtype1, dimtype2,
+		dimvalue1, dimvalue2, result);
 		String bfilename = ServletUtilities.saveChartAsPNG(chart, 800,
 		500, null, session);
 		barGraphURL = request.getContextPath()
 		+ "/DisplayChart?filename=" + bfilename;
+
 		//生成饼状图
-		JFreeChart chart2 = c.getOneDimPieChart(dimtype, result);
+		JFreeChart chart2 = c.getTwoDimPieChart(dimtype1, dimtype2,
+		result);
 		String pfilename = ServletUtilities.saveChartAsPNG(chart2, 500,
 		500, null, session);
 		pieGraphURL = request.getContextPath()
 		+ "/DisplayChart?filename=" + pfilename;
+
 		//生成折线图
-		JFreeChart chart3 = c.getOneDimLineChart(dimtype, result);
+		JFreeChart chart3 = c.getTwoDimLineChart(dimtype1, dimtype2,
+		result);
 		String lfilename = ServletUtilities.saveChartAsPNG(chart3, 800,
 		500, null, session);
 		lineGraphURL = request.getContextPath()
 		+ "/DisplayChart?filename=" + lfilename;
-
 	}
 %>
+
 <body>
 	<div class="container">
 		<div>
-			<form id="timePinfaForm" action="tongji_OnedimTime.jsp" method="post"
+			<form action="tongji_Twodim.jsp" method="post" name="form1"
 				onsubmit="return commitCheck()" class="form-horizontal" role="form">
 				<div class="form-group">
 					<label for="inputMsg" class="col-sm-2 control-label"> </label> <label
 						style="color: rgb(176, 23, 31)" id="inputMsg"></label>
 				</div>
-
 				<div class="form-group">
-					<label for="dimSelect" class="col-sm-2 control-label">统计维度</label>
-					<div class="col-sm-10">
-						<select name="dimSelect" id="dimSelect"  class="form-control">
-							<option value="">选择统计维度</option>
+					<label for="dtype1Select" class="col-sm-2 control-label">维度一</label>
+					<div class="col-sm-5">
+						<select name="dtype1Select" id="dtype1Select" class="form-control"
+							onChange="getValue(this.selectedIndex,1)">
+<!-- 							<option value="">选择维度一</option> -->
 							<%
 								for (int i = 0; i < dimStrs.size(); i++) {
 							%>
 							<option value=<%=dimStrs.get(i)%>><%=dimStrs.get(i)%></option>
+							<%
+								}
+							%>
+						</select>
+					</div>
+					<label for="dvalue1Select" class="sr-only"></label>
+					<div class="col-sm-5">
+						<select name="dvalue1Select" id="dvalue1Select"
+							class="form-control">
+							<option value="">维度一取值</option>
+							<%
+								for (int i = 0; i < diquStrs.size(); i++) {
+							%>
+							<option value=<%=diquStrs.get(i)%>><%=diquStrs.get(i)%>
+							</option>
+							<%-- 							<option value=<%=diquStrs.get(i)%>> <%=diquStrs.get(i)%></option> --%>
+							<%
+								}
+							%>
+						</select>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label for="dtype2Select" class="col-sm-2 control-label">维度二</label>
+					<div class="col-sm-5">
+						<select name="dtype2Select" id="dtype2Select" class="form-control"
+							onChange="getValue(this.selectedIndex,2)">
+<!-- 							<option value="">选择维度二</option> -->
+							<%
+								for (int i = 0; i < dimStrs.size(); i++) {
+							%>
+							<option value=<%=dimStrs.get(i)%>><%=dimStrs.get(i)%></option>
+							<%
+								}
+							%>
+						</select>
+					</div>
+					<label for="dvalue2Select" class="sr-only"></label>
+					<div class="col-sm-5">
+						<select name="dvalue2Select" id="dvalue2Select"
+							class="form-control">
+							<option value="">维度二取值</option>
+							<%
+								for (int i = 0; i < diquStrs.size(); i++) {
+							%>
+							<option value=<%=diquStrs.get(i)%>><%=diquStrs.get(i)%></option>
 							<%
 								}
 							%>
@@ -118,7 +189,8 @@ org.jfree.chart.servlet.*,org.jfree.chart.plot.PlotOrientation,org.jfree.data.ge
 					<label for="timeSelect" class="col-sm-2 control-label">统计时间</label>
 					<div class="col-sm-10">
 						<select name="timeSelect" id="timeSelect"
-							onChange="selectTimeValue(this.selectedIndex)" class="form-control">
+							onChange="selectTimeValue(this.selectedIndex)"
+							class="form-control">
 							<option value="0">请选择</option>
 							<option value="1">年度</option>
 							<option value="2">季节</option>
@@ -129,7 +201,6 @@ org.jfree.chart.servlet.*,org.jfree.chart.plot.PlotOrientation,org.jfree.data.ge
 						</select>
 					</div>
 				</div>
-
 				<div class="form-group" id="year_row">
 					<label for="sy_year" class="col-sm-2 control-label">起始年度</label>
 					<div class="col-sm-4">
@@ -207,21 +278,16 @@ org.jfree.chart.servlet.*,org.jfree.chart.plot.PlotOrientation,org.jfree.data.ge
 					</div>
 				</div>
 				<div class="form-group">
-					<div class="col-sm-offset-2 col-sm-10">
-						<button type="submit" class="btn btn-default">确定</button>
+					<div class="col-sm-offset-2 col-sm-4">
+						<input type="submit" name="normalButton" class="btn btn-default"
+							value="自选维度分析"> </input>
+					</div>
+					<div class="col-sm-offset-2 col-sm-4">
+						<input type="submit" name="fastButton" class="btn btn-default"
+							title="发生地区+事件性质" value="一键分析"> </input>
 					</div>
 				</div>
 
-
-				<!-- 				<div class="row"> -->
-				<!-- 					<div class="col-xs-3"></div> -->
-				<!-- 					<div class="col-xs-6"></div> -->
-				<!-- 					<div class="col-xs-3"> -->
-				<!-- 						<div class="input-append"> -->
-				<!-- 							<button class="btn" type="button">确定</button> -->
-				<!-- 						</div> -->
-				<!-- 					</div> -->
-				<!-- 				</div> -->
 
 			</form>
 		</div>
@@ -229,12 +295,11 @@ org.jfree.chart.servlet.*,org.jfree.chart.plot.PlotOrientation,org.jfree.data.ge
 			<%
 				if (barGraphURL != null) {
 			%>
-			<h3>频发统计图</h3>
+			<h3 style="align: center">频发统计图</h3>
 			<p>
 				<img src="<%=barGraphURL%>" class="img-rounded"></br> </br> <img
-					src="<%=pieGraphURL%>"  class="img-rounded"></br> </br> <img
+					src="<%=pieGraphURL%>" class="img-rounded"></br> </br> <img
 					src="<%=lineGraphURL%>" class="img-rounded">
-<!-- 					width=800 height=500 border=0 -->
 			</p>
 			<%
 				}
@@ -243,7 +308,37 @@ org.jfree.chart.servlet.*,org.jfree.chart.plot.PlotOrientation,org.jfree.data.ge
 	</div>
 </body>
 </html>
+
 <script type="text/javascript" language="javascript">
+dimValue = new Array();
+	<%for(int i = 0; i <valueStrs.length;i++){%> 
+		dimValue[<%=i%>]=new Array();
+		
+		<%for (int j = 0; j < valueStrs[i].length; j++) {%>
+			dimValue[<%=i%>][<%=j%>]='<%=valueStrs[i][j]%>';
+<%}
+ 			}%>
+ 			
+	function getValue(dim, num) {
+		var i;
+		if (num === 1) {
+			document.all.dvalue1Select;
+			// 			dvalue1Select.length = 1;
+			document.all.dvalue1Select.options.length = 1;
+			for (i = 0; i < dimValue[dim].length; i++) {
+				document.all.dvalue1Select.options[document.all.dvalue1Select.length] = new Option(
+						dimValue[dim][i], dimValue[dim][i]);
+			}
+		}
+		if (num === 2) {
+			document.all.dvalue2Select.options.length = 1;
+			for (i = 0; i < dimValue[dim].length; i++) {
+				document.all.dvalue2Select.options[document.all.dvalue2Select.length] = new Option(
+						dimValue[dim][i], dimValue[dim][i]);
+			}
+		}
+	}
+
 	function selectTimeValue(sel) {
 		switch (sel) {
 		case 0, 1:
@@ -305,18 +400,12 @@ org.jfree.chart.servlet.*,org.jfree.chart.plot.PlotOrientation,org.jfree.data.ge
 		// 		$("#inputMsg").text("请输入数字 ");
 		return false;
 	}
-	 
+
 	/**
 	 * 表单提交 检查 
 	 */
 	function commitCheck() {
-		var dimsel = $("#dimSelect").find("option:selected").val();
 		var timesel = $("#timeSelect").find("option:selected").val();
-// 		alert("dimsel:" + dimsel + " timesel: " + timesel);
-		if (dimsel == "") {
-			$("#inputMsg").text("请选择统计维度 ");
-			return false;
-		}
 		if (timesel == "0") {
 			$("#inputMsg").text("请选择统计时间 ");
 			return false;
