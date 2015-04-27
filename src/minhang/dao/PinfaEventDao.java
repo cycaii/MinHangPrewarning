@@ -19,8 +19,6 @@ import minhang.entity.Totalbase;
 import minhang.util.DatabaseSupport;
 import minhang.util.GlobalConstant;
 
-import org.apache.commons.lang.StringUtils;
-
 /**
  * 频发事件
  * 
@@ -173,14 +171,15 @@ public class PinfaEventDao {
 		String colName = getcolName(dimtype);
 		List<Totalbase> results = new ArrayList<Totalbase>();
 		Totalbase totalbase = null;
+		String basesql;
 		/** mysql */
 		if (GlobalConstant.DBTYPE == 2) {
-			String basesql = "select * from totalbase where " + colName + "= '"
+			basesql = "select * from totalbase where " + colName + "= '"
 					+ dimvalue + "' and  fashengriqi ='"
 					+ new java.sql.Date(day.getTime()) + "'";
 		} else {
 			/** oracle */
-			String basesql = "select * from totalbase where " + colName + "= '"
+			basesql = "select * from totalbase where " + colName + "= '"
 					+ dimvalue + "' and  to_char(fashengriqi,'YYYY-MM-DD') ='"
 					+ new java.sql.Date(day.getTime()) + "'";
 			// select * from mytable where to_char(install_date,'YYYYMMDD') >
@@ -377,17 +376,18 @@ public class PinfaEventDao {
 		String colName2 = getcolName(dimtype2);
 		List<Totalbase> results = new ArrayList<Totalbase>();
 		Totalbase totalbase = null;
+		String basesql;
 		/** mysql */
 		if (GlobalConstant.DBTYPE == 2) {
-			String basesql = "select * from totalbase where " + colName1
-					+ "= '" + dimvalue1 + "' and " + colName2 + "= '"
-					+ dimvalue2 + "' and  fashengriqi ='"
+			basesql = "select * from totalbase where " + colName1 + "= '"
+					+ dimvalue1 + "' and " + colName2 + "= '" + dimvalue2
+					+ "' and  fashengriqi ='"
 					+ new java.sql.Date(day.getTime()) + "'";
 		} else {
 			/** oracle */
-			String basesql = "select * from totalbase where " + colName1
-					+ "= '" + dimvalue1 + "' and " + colName2 + "= '"
-					+ dimvalue2 + "' and  to_char(fashengriqi,'YYYY-MM-DD') ='"
+			basesql = "select * from totalbase where " + colName1 + "= '"
+					+ dimvalue1 + "' and " + colName2 + "= '" + dimvalue2
+					+ "' and  to_char(fashengriqi,'YYYY-MM-DD') ='"
 					+ new java.sql.Date(day.getTime()) + "'";
 		}
 		try {
