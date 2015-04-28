@@ -29,6 +29,36 @@ public class UserDao {
 		c = DatabaseSupport.getConnection(GlobalConstant.DBTYPE);
 	}
 
+	public User getUserById(String userid) {
+		User u = null;
+		String sql = "select * from userinfo  where userid = ? ";
+		PreparedStatement pstmt = null;
+		try {
+			pstmt = c.prepareStatement(sql);
+			pstmt.setString(1, userid);
+			System.out.println("sql语句 : " + sql);
+
+			ResultSet rs = pstmt.executeQuery();// 查询
+
+			if (rs.next()) {
+				u = new User();
+				u.setUsername(rs.getString("username"));
+				u.setPassword(rs.getString("password"));
+				u.setGender(rs.getInt("gender"));
+				u.setPermission(rs.getInt("permission"));
+				u.setDescription(rs.getString("description"));
+				u.setState(rs.getInt("state"));
+				u.setUserid(rs.getString("userid"));
+			}
+			rs.close();
+			pstmt.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return u;
+
+	}
+
 	/**
 	 * 用户登陆验证
 	 */
@@ -91,6 +121,32 @@ public class UserDao {
 		}
 		return rtn;
 
+	}
+
+	/**
+	 * 更新用户
+	 */
+	public boolean updateUser(User user) {
+		boolean result = false;
+		String sql = "update userinfo set  username=?,password=?,description=?,gender=?,permission=?,state=? where userid = ?";
+		PreparedStatement preparedStatement;
+		try {
+			preparedStatement = c.prepareStatement(sql);
+			preparedStatement.setString(1, user.getUsername());
+			preparedStatement.setString(2, user.getPassword());
+			preparedStatement.setString(3, user.getDescription());
+			preparedStatement.setInt(4, user.getGender());
+			preparedStatement.setInt(5, user.getPermission());
+			preparedStatement.setInt(6, user.getState());
+			preparedStatement.setString(7, user.getUserid());
+			System.out.println("UserDao-update:" + sql);
+			preparedStatement.execute();
+
+			result = true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 
 	/**

@@ -59,14 +59,18 @@
 									class="imoon imoon-dashboard fa-fw"></i> 个人用户管理</a></li>
 						</ul>
 					</div>
+								 
+								
 					<div class="col-md-12">
 						<div class="div-myroademap-right-above">
+						<a class="btn btn-primary" href="admin_newuser.action" target="_blank">新增用户</a>
 							<table class="table table-hover">
 								<thead>
 									<tr>
 										<th>状态</th>
 										<th>姓名</th>
 										<th>性别</th>
+										<th>权限</th>
 										<th>操作1</th>
 										<th>操作2</th>
 									</tr>
@@ -87,20 +91,24 @@
 													<s:if test="#user.gender==0">男</s:if>
 													<s:elseif test="#user.gender==1">女</s:elseif>
 												</s:if> <s:else>无</s:else></td>
-											 
+											 <td><s:if
+													test=" #user.permission==0||#user.permission==1 ">
+													<s:if test="#user.permission==0">管理员</s:if>
+													<s:elseif test="#user.permission==1">普通用户</s:elseif>
+												</s:if> <s:else>无</s:else></td>
 											<td><s:if test="#user.state!=1">
 													<a
-														href="admin-del.action?id=${user.userid}"
+														href="admin_del.action?userid=${user.userid}"
 														class="btn btn-small btn-danger" type="button">屏蔽</a>
 												</s:if> <s:else>
 													<a
-														href="admin-recover.action?id=${user.userid}"
+														href="admin_recover.action?userid=${user.userid}"
 														class="btn btn-small btn-warning" type="button">恢复</a>
 												</s:else> <%-- <a href="admin-del.action?id=${user.uid}&flag=user" class="btn btn-small btn-danger" type="button">删除</a> --%>
 											</td>
 											<td><a
-												href="admin-edit.action?id=${user.userid}"
-												target="_blank">Edit</a></td>
+												href="admin_userinfo.action?userid=${user.userid}"
+												>Edit</a></td>
 										</tr>
 									</s:iterator>
 

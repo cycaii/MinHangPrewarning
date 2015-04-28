@@ -78,9 +78,11 @@
 	<!-- 后台管理 -->
 	<package name="admin" namespace="/admin" extends="struts-default">
 		<action name="admin_*" method="{1}" class="minhang.action.AdminAction">
-			<result name="success" type="redirect">/userlist.jsp</result>
-			<result name="userlist">userlist.jsp</result>
+			<result name="userlist"> userlist.jsp</result>
+			<result name="userinfo"> userinfo.jsp</result>
+			<result name="newuser">newuser.jsp</result>
 			<result name="login">admin-login.jsp</result>
+			<result name="error">404.jsp</result>
 		</action>
 	</package>
 </struts>
