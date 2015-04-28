@@ -29,10 +29,11 @@
 					<label for="dimSelect" class="col-sm-2 control-label">偶发维度</label>
 					<div class="col-sm-6">
 						<select name="dimSelect" id="dimSelect" class="form-control">
-							<option value="">选择维度 </option>
+							<option value="">选择维度</option>
 
 							<s:iterator value="dimStrs" id="dimStr">
-								<option value="<s:property value="dimStr" />" <s:if test="#dimStr==dimSelect">selected="selected"</s:if>>
+								<option value="<s:property value="dimStr" />"
+									<s:if test="#dimStr==dimSelect">selected="selected"</s:if>>
 									<s:property value="dimStr" />
 								</option>
 							</s:iterator>
@@ -45,8 +46,9 @@
 						<div class="input-group date form_date  col-sm-7" data-date=""
 							data-date-format="dd MM yyyy" data-link-field="pinfaDate"
 							data-link-format="yyyy-mm-dd">
-							<input class="form-control" size="16" type="text" value="<s:property value="pinfaDate"/>"
-								id="pinfaDate" name="pinfaDate" readonly> <span
+							<input class="form-control" size="16" type="text"
+								value="<s:property value="pinfaDate"/>" id="pinfaDate"
+								name="pinfaDate" readonly> <span
 								class="input-group-addon"><span
 									class="glyphicon glyphicon-calendar"></span></span>
 						</div>
@@ -92,23 +94,30 @@
 							<td><s:property value="dimvalue" /></td>
 							<td><s:property value="pinfaPeriod" /></td>
 							<td><s:iterator value="countValue" id="PinfaElem">
-<!-- 									<a
+									<!-- 									<a
 										href="javascript:detail('<s:property
  										value="dimtype" />','<s:property
  										value="dimvalue" />',<s:property
  										value="day" />,1 )"
 										 > <strong><s:property
-  										value="num" /></strong></a>  --> 
-		<a
-										href="oufa/pinfaEventDetail.jsp?dimtype=<s:property value="dimtype"/>&dimvalue=<s:property value="dimvalue" />&day=<s:date name="day" format="yyyy-MM-dd" />&dim=1"
-										target="_blank"> <strong><s:property
- 												value="num" /></strong></a>  
+  										value="num" /></strong></a>  -->
+									<s:url id="idUrl" action="oufa_showOufaEventDetail.action">
+										<s:param name="dimtype" value="${dimtype}" />
+										<s:param name="dimvalue" value="${dimvalue}" />
+										<s:param name="day"
+											value="<s:date name="day" format="yyyy-MM-dd" />" />
+										<s:param name="dim" value="1" />
+
+									</s:url>
+<!-- 									<a -->
+<%-- 										href="oufa/pinfaEventDetail.jsp?dimtype=<s:property value="dimtype"/>&dimvalue=<s:property value="dimvalue" />&day=<s:date name="day" format="yyyy-MM-dd" />&dim=1" --%>
+<%-- 										target="_blank"> <strong><s:property value="num" /></strong></a> --%>
 								</s:iterator></td>
 						</tr>
 					</s:iterator>
-					
+
 				</table>
-				</s:elseif>
+			</s:elseif>
 		</div>
 	</div>
 
@@ -171,18 +180,19 @@
 		}
 
 	}
-// 	,dimvalue,day,dim
-	function detail(dimtype	,dimvalue,day,dim){
-		alert(dimtype+  " "+dimvalue+" "+day+" "+dim);
-// 		var dimtypeStr =encodeURI(dimtype); 
-// 		dimtypeStr=encodeURI(dimtypeStr); 
-// 		var dimvalueStr =encodeURI(dimvalue); 
-// 		dimtypeStr=encodeURI(dimvalueStr); 
-		window.open("oufa_showOufaEventDetail.action?dimtype="+dimtype+"&dimvalue="+dimvalue+"&day="+day+"&dim="+dim);      
-		
+	// 	,dimvalue,day,dim
+	function detail(dimtype, dimvalue, day, dim) {
+		alert(dimtype + " " + dimvalue + " " + day + " " + dim);
+		// 		var dimtypeStr =encodeURI(dimtype); 
+		// 		dimtypeStr=encodeURI(dimtypeStr); 
+		// 		var dimvalueStr =encodeURI(dimvalue); 
+		// 		dimtypeStr=encodeURI(dimvalueStr); 
+		window.open("oufa_showOufaEventDetail.action?dimtype=" + dimtype
+				+ "&dimvalue=" + dimvalue + "&day=" + day + "&dim=" + dim);
+
 	}
-	
-	function test(){
+
+	function test() {
 		alert("aaa");
 	}
 </script>
