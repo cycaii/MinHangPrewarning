@@ -102,20 +102,22 @@
 							<td><s:property value="dimvalue" /></td>
 							<td><s:property value="pinfaPeriod" /></td>
 							<td><s:iterator value="countValue" id="PinfaElem">
-									<!-- 									<a 
-										href="oufa_showOufaEventDetail.action?dimtype=<s:property value="dimtype" />&dimvalue=<s:property value="dimvalue" />&day=<s:date name="day" format="yyyy-MM-dd" />&dim=2"
-										target="_blank"> <strong><s:property value="num" /></strong></a>-->
-									<s:url id="idUrl" action="oufa_showOufaEventDetail.action">
-										<s:param name="dimtype" value="${dimtype}" />
-										<s:param name="dimvalue" value="${dimvalue}" />
-										<s:param name="day"
-											value="<s:date name="day" format="yyyy-MM-dd" />" />
-										<s:param name="dim" value="2" />
-
-									</s:url>
 <!-- 									<a -->
-<%-- 										href="oufa/pinfaEventDetail.jsp?dimtype=<s:property value="dimtype" />&dimvalue=<s:property value="dimvalue" />&day=<s:date name="day" format="yyyy-MM-dd" />&dim=2" --%>
+<%-- 										href="oufa_showOufaEventDetail.action?dimtype=<s:property value="dimtype" />&dimvalue=<s:property value="dimvalue" />&day=<s:date name="day" format="yyyy-MM-dd" />&dim=2" --%>
 <%-- 										target="_blank"> <strong><s:property value="num" /></strong></a> --%>
+									<!-- 									<a -->
+									<%-- 										href="oufa/pinfaEventDetail.jsp?dimtype=<s:property value="dimtype" />&dimvalue=<s:property value="dimvalue" />&day=<s:date name="day" format="yyyy-MM-dd" />&dim=2" --%>
+									<%-- 										target="_blank"> <strong><s:property value="num" /></strong></a> --%>
+
+									<a target="_blank"
+										href="<s:url action="oufa_showOufaEventDetail.action">
+										<s:param name="dimtype" value="%{dimtype}" />
+										<s:param name="dimvalue" value="%{dimvalue}" />
+										<s:param name="day" value="%{day}" />
+										<s:param name="dim" value="2" />
+									</s:url>"><s:property
+											value="num" /></a>
+
 
 								</s:iterator></td>
 						</tr>

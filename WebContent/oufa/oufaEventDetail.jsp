@@ -22,9 +22,8 @@
 				&nbsp;	【<s:property value="dimtype2" />】:<s:property
 							value="dimvalue2" />
 					</s:elseif>
-					（
-					<s:property value="day" />
-					）
+					(<s:date name="day" format="yyyy-MM-dd" /> 
+					)
 				</caption>
 				<tr>
 					<th>标题</th>

@@ -127,13 +127,13 @@ public class OufaAction extends ActionSupport {
 	}
 
 	public String showOufaEventDetail() {
-		try {
-			// dimvalue=new String(dimvalue.getBytes("utf-8"));
-			dimvalue = new String(getDimvalue().getBytes("iso-8859-1"), "UTF-8");
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		try {
+//			// dimvalue=new String(dimvalue.getBytes("utf-8"));
+//			dimvalue = new String(getDimvalue().getBytes("iso-8859-1"), "UTF-8");
+//		} catch (UnsupportedEncodingException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		System.out.println("showOufaEventDetail-dimtype:" + dimtype
 				+ "  dimvalue:" + dimvalue + "  day:" + day + "  dim:" + dim);
 
@@ -153,6 +153,38 @@ public class OufaAction extends ActionSupport {
 					dimvalue1, dimtype2, dimvalue2, day);
 		}
 		return "oufaDetail";
+	}
+
+	public String getDimtype1() {
+		return dimtype1;
+	}
+
+	public void setDimtype1(String dimtype1) {
+		this.dimtype1 = dimtype1;
+	}
+
+	public String getDimvalue1() {
+		return dimvalue1;
+	}
+
+	public void setDimvalue1(String dimvalue1) {
+		this.dimvalue1 = dimvalue1;
+	}
+
+	public String getDimtype2() {
+		return dimtype2;
+	}
+
+	public void setDimtype2(String dimtype2) {
+		this.dimtype2 = dimtype2;
+	}
+
+	public String getDimvalue2() {
+		return dimvalue2;
+	}
+
+	public void setDimvalue2(String dimvalue2) {
+		this.dimvalue2 = dimvalue2;
 	}
 
 	/**

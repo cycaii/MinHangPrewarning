@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@include file="/common/header.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -101,17 +102,17 @@
  										value="day" />,1 )"
 										 > <strong><s:property
   										value="num" /></strong></a>  -->
-									<s:url id="idUrl" action="oufa_showOufaEventDetail.action">
-										<s:param name="dimtype" value="${dimtype}" />
-										<s:param name="dimvalue" value="${dimvalue}" />
-										<s:param name="day"
-											value="<s:date name="day" format="yyyy-MM-dd" />" />
+								<a
+									target="_blank"	href="<s:url action="oufa_showOufaEventDetail.action">
+										<s:param name="dimtype" value="%{dimtype}" />
+										<s:param name="dimvalue" value="%{dimvalue}" />
+										<s:param name="day" value="%{day}" />
 										<s:param name="dim" value="1" />
-
-									</s:url>
-<!-- 									<a -->
-<%-- 										href="oufa/pinfaEventDetail.jsp?dimtype=<s:property value="dimtype"/>&dimvalue=<s:property value="dimvalue" />&day=<s:date name="day" format="yyyy-MM-dd" />&dim=1" --%>
-<%-- 										target="_blank"> <strong><s:property value="num" /></strong></a> --%>
+									</s:url>"><s:property
+  										value="num" /></a>
+									<!-- 									<a -->
+									<%-- 										href="oufa/pinfaEventDetail.jsp?dimtype=<s:property value="dimtype"/>&dimvalue=<s:property value="dimvalue" />&day=<s:date name="day" format="yyyy-MM-dd" />&dim=1" --%>
+									<%-- 										target="_blank"> <strong><s:property value="num" /></strong></a> --%>
 								</s:iterator></td>
 						</tr>
 					</s:iterator>
