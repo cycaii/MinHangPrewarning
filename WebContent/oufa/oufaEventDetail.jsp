@@ -24,6 +24,10 @@
 					</s:elseif>
 					(<s:date name="day" format="yyyy-MM-dd" /> 
 					)
+						<button class="btn btn-new1 hidden-print" style="float: right;"
+						onclick="window.print()">
+						<i class="fa fa-print"></i>打印结果
+					</button>
 				</caption>
 				<tr>
 					<th>标题</th>
