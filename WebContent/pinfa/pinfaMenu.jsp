@@ -7,16 +7,30 @@
 <!-- 	<a href="pinfa_showPinfaZhishu.action" target="main"> &nbsp; 频发指数</a> -->
 <!-- </h1> -->
 <!-- BI版 -->
-<h1>
-	<a
-		href="http://localhost:9704/analytics/saw.dll?PortalPages&PortalPath=/shared/minhang/_portal/yiweipinfajisuan&NQUser=weblogic&NQPassword=Admin123"
-		target="main"> 一维频发指数</a>
+<h1 onClick="javascript:ShowMenu(this,0)">
+	<a href="javascript:void(0)">  +   频发指数</a>
 </h1>
-<h1>
-	<a
-		href="http://localhost:9704/analytics/saw.dll?PortalPages&PortalPath=/shared/minhang/_portal/erweipinfajisuan&NQUser=weblogic&NQPassword=Admin123"
-		target="main"> 二维频发指数</a>
-</h1>
+<span class="no">
+	<h2>
+		<a href="http://localhost:9704/analytics/saw.dll?PortalPages&PortalPath=/shared/minhang/_portal/一维频发指数&NQUser=weblogic&NQPassword=Admin123" target="main"> 一维频发指数</a>
+	</h2>
+	<h2>
+		<a href="http://localhost:9704/analytics/saw.dll?PortalPages&PortalPath=/shared/minhang/_portal/二维频发指数&NQUser=weblogic&NQPassword=Admin123" target="main"> 二维频发指数</a>
+	</h2>
+	
+</span>
+<h3 onClick="javascript:ShowMenu(this,1)">
+	<a href="javascript:void(1)"> +  事故率</a>
+</h3>
+<span class="no">
+	<h2>
+		<a href="http://localhost:9704/analytics/saw.dll?PortalPages&PortalPath=/shared/minhang/_portal/一维事故率整体统计&NQUser=weblogic&NQPassword=Admin123" target="main"> 一维事故率</a>
+	</h2>
+	<h2>
+		<a href="http://localhost:9704/analytics/saw.dll?PortalPages&PortalPath=/shared/minhang/_portal/二维事故率整体统计&NQUser=weblogic&NQPassword=Admin123" target="main"> 二维事故率</a>
+	</h2>
+		
+</span>
 <script language="JavaScript">
 <!--//
 	function ShowMenu(obj, n) {

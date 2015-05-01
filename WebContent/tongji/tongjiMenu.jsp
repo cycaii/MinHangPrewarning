@@ -28,16 +28,16 @@
 </h1>
 <span class="no">
 	<h2>
-		<a href="http://localhost:9704/analytics/saw.dll?PortalPages&PortalPath=/shared/minhang/_portal/yiweizhengti&NQUser=weblogic&NQPassword=Admin123" target="main"> 整体排序</a>
+		<a href="http://localhost:9704/analytics/saw.dll?PortalPages&PortalPath=/shared/minhang/_portal/一维频数整体统计&NQUser=weblogic&NQPassword=Admin123" target="main"> 整体排序</a>
 	</h2>
 	<h2>
-		<a href="http://localhost:9704/analytics/saw.dll?PortalPages&PortalPath=/shared/minhang/_portal/yiweiqushi&NQUser=weblogic&NQPassword=Admin123" target="main"> 趋势分析</a>
+		<a href="http://localhost:9704/analytics/saw.dll?PortalPages&PortalPath=/shared/minhang/_portal/一维频数时间统计&NQUser=weblogic&NQPassword=Admin123" target="main"> 趋势分析</a>
 	</h2>
 	<h2>
-		<a href="http://localhost:9704/analytics/saw.dll?PortalPages&PortalPath=/shared/minhang/_portal/yiweitongbi&NQUser=weblogic&NQPassword=Admin123" target="main"> 同比分析</a>
+		<a href="http://localhost:9704/analytics/saw.dll?PortalPages&PortalPath=/shared/minhang/_portal/一维频数同比统计&NQUser=weblogic&NQPassword=Admin123" target="main"> 同比分析</a>
 	</h2>
 	<h2>
-		<a href="http://localhost:9704/analytics/saw.dll?PortalPages&PortalPath=/shared/minhang/_portal/yiweihuanbi&NQUser=weblogic&NQPassword=Admin123" target="main"> 环比分析</a>
+		<a href="http://localhost:9704/analytics/saw.dll?PortalPages&PortalPath=/shared/minhang/_portal/一维频数环比统计&NQUser=weblogic&NQPassword=Admin123" target="main"> 环比分析</a>
 	</h2>
 </span>
 <h3 onClick="javascript:ShowMenu(this,1)">
@@ -45,16 +45,16 @@
 </h3>
 <span class="no">
 	<h2>
-		<a href="http://localhost:9704/analytics/saw.dll?PortalPages&PortalPath=/shared/minhang/_portal/erweizhengtipaixu&NQUser=weblogic&NQPassword=Admin123" target="main"> 整体排序</a>
+		<a href="http://localhost:9704/analytics/saw.dll?PortalPages&PortalPath=/shared/minhang/_portal/二维频数整体统计&NQUser=weblogic&NQPassword=Admin123" target="main"> 整体排序</a>
 	</h2>
 	<h2>
-		<a href="http://localhost:9704/analytics/saw.dll?PortalPages&PortalPath=/shared/minhang/_portal/erweiqushi&NQUser=weblogic&NQPassword=Admin123" target="main"> 趋势分析</a>
+		<a href="http://localhost:9704/analytics/saw.dll?PortalPages&PortalPath=/shared/minhang/_portal/二维频数时间统计&NQUser=weblogic&NQPassword=Admin123" target="main"> 趋势分析</a>
 	</h2>
 	<h2>
-		<a href="http://localhost:9704/analytics/saw.dll?PortalPages&PortalPath=/shared/minhang/_portal/erweitongbi&NQUser=weblogic&NQPassword=Admin123" target="main"> 同比分析</a>
+		<a href="http://localhost:9704/analytics/saw.dll?PortalPages&PortalPath=/shared/minhang/_portal/二维频数同比统计&NQUser=weblogic&NQPassword=Admin123" target="main"> 同比分析</a>
 	</h2>
 	<h2>
-		<a href="http://localhost:9704/analytics/saw.dll?PortalPages&PortalPath=/shared/minhang/_portal/erweihuanbi&NQUser=weblogic&NQPassword=Admin123" target="main"> 环比分析</a>
+		<a href="http://localhost:9704/analytics/saw.dll?PortalPages&PortalPath=/shared/minhang/_portal/二维频数环比统计&NQUser=weblogic&NQPassword=Admin123" target="main"> 环比分析</a>
 	</h2>
 </span>
  

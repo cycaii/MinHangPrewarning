@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-      pageEncoding="UTF-8"%> 
+	pageEncoding="UTF-8"%>
 <%-- <%@ page language="java" contentType="text/html; charset=GBK" --%>
 <%-- 	pageEncoding="GBK"%> --%>
 <%@include file="/common/header.jsp"%>
@@ -26,17 +26,17 @@
 					<%@ include file="pinfaMenu.jsp"%>
 				</div>
 			</div>
-<!-- 			<div id="main1"> -->
-<%-- 				<s:if test="frameContent=='pinfaZhishu'"> --%>
-<!-- 					<iframe name="main" scrolling="auto" frameborder="0" -->
-<!-- 						src="pinfa_showPinfaZhishu.action"></iframe> -->
-<%-- 				</s:if> --%>
-<!-- 			</div> -->
+			<!-- 			<div id="main1"> -->
+			<%-- 				<s:if test="frameContent=='pinfaZhishu'"> --%>
+			<!-- 					<iframe name="main" scrolling="auto" frameborder="0" -->
+			<!-- 						src="pinfa_showPinfaZhishu.action"></iframe> -->
+			<%-- 				</s:if> --%>
+			<!-- 			</div> -->
 			<!-- 	 BI链接 -->
-						<div id="main1">
-							<iframe name="main" scrolling="auto" frameborder="0"
-								src="http://localhost:9704/analytics/saw.dll?PortalPages&PortalPath=/shared/minhang/_portal/yiweipinfajisuan&NQUser=weblogic&NQPassword=Admin123"></iframe>
-						</div>
+			<div id="main1">
+				<iframe name="main" scrolling="auto" frameborder="0"
+					src="http://localhost:9704/analytics/saw.dll?PortalPages&PortalPath=/shared/minhang/_portal/一维频发指数&NQUser=weblogic&NQPassword=Admin123"></iframe>
+			</div>
 		</div>
 	</div>
 

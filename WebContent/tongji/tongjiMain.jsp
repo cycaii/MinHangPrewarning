@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-      pageEncoding="UTF-8"%>  
+	pageEncoding="UTF-8"%>
 <%-- <%@ page language="java" contentType="text/html; charset=GBK" --%>
 <%-- 	pageEncoding="GBK"%> --%>
 <%@include file="/common/header.jsp"%>
@@ -24,14 +24,14 @@
 					<%@ include file="tongjiMenu.jsp"%>
 				</div>
 			</div>
-<!-- 			<div id="main1"> -->
-<!-- 				<iframe name="main" scrolling="auto" frameborder="0" -->
-<!-- 					src="tongji_OnedimTime.jsp"></iframe> -->
-<!-- 			</div> -->
-<!-- 			BI版 -->
+			<!-- 			<div id="main1"> -->
+			<!-- 				<iframe name="main" scrolling="auto" frameborder="0" -->
+			<!-- 					src="tongji_OnedimTime.jsp"></iframe> -->
+			<!-- 			</div> -->
+			<!-- 			BI版 -->
 			<div id="main1">
 				<iframe name="main" scrolling="auto" frameborder="0"
-					src="http://localhost:9704/analytics/saw.dll?PortalPages&PortalPath=/shared/minhang/_portal/yiweizhengti&NQUser=weblogic&NQPassword=Admin123"></iframe>
+					src="http://localhost:9704/analytics/saw.dll?PortalPages&PortalPath=/shared/minhang/_portal/一维频数整体统计&NQUser=weblogic&NQPassword=Admin123"></iframe>
 			</div>
 		</div>
 	</div>

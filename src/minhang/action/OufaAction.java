@@ -127,14 +127,14 @@ public class OufaAction extends ActionSupport {
 	}
 
 	public String showOufaEventDetail() {
-		try {
-			// dimvalue=new String(dimvalue.getBytes("utf-8"));
-			dimvalue = new String(getDimvalue().getBytes("iso-8859-1"), "UTF-8");
-			dimtype = new String(dimtype.getBytes("iso-8859-1"), "UTF-8");
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		try {
+//			// dimvalue=new String(dimvalue.getBytes("utf-8"));
+//			dimvalue = new String(getDimvalue().getBytes("iso-8859-1"), "UTF-8");
+//			dimtype = new String(dimtype.getBytes("iso-8859-1"), "UTF-8");
+//		} catch (UnsupportedEncodingException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		System.out.println("showOufaEventDetail-dimtype:" + dimtype
 				+ "  dimvalue:" + dimvalue + "  day:" + day + "  dim:" + dim);
 
