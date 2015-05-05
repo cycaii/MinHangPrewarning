@@ -4,7 +4,7 @@
 <%-- 	pageEncoding="GBK"%> --%>
 <%@include file="/common/header.jsp"%>
 <%@page
-	import="minhang.dao.*,minhang.service.*,minhang.entity.*,java.util.*,org.jfree.chart.*,org.jfree.chart.plot.*,org.jfree.chart.labels.*,
+	import="minhang.dao.*,minhang.service.*,minhang.entity.*,minhang.util.*,minhang.algo.*,java.util.*,org.jfree.chart.*,org.jfree.chart.plot.*,org.jfree.chart.labels.*,
 org.jfree.data.category.*,org.jfree.data.general.DefaultPieDataset,org.jfree.ui.*,org.jfree.chart.renderer.category.BarRenderer3D,
 org.jfree.chart.servlet.*,org.jfree.chart.plot.PlotOrientation,org.jfree.data.general.DatasetUtilities"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -20,17 +20,12 @@ org.jfree.chart.servlet.*,org.jfree.chart.plot.PlotOrientation,org.jfree.data.ge
 	request.setCharacterEncoding("gbk");
 
 	//get common objects
-	CommonService c = (CommonService) application
-	.getAttribute("CommonService");
-	DimtypeDao d = (DimtypeDao) application.getAttribute("DimtypeDao");
-	OnedimstatisticDao od = (OnedimstatisticDao) application
-	.getAttribute("OnedimstatisticDao");
-	String[][] valueStrs = (String[][]) application
-	.getAttribute("valueStrsArray");
-	List<String> diquStrs = (List<String>) application
-	.getAttribute("diquValueStrs");
-	List<String> didianStrs = (List<String>) application
-	.getAttribute("didianValueStrs");
+	CommonService c =new CommonService();
+	DimtypeDao d =  DimtypeDao.getInstance();
+	OnedimstatisticDao od =  OnedimstatisticDao.getInstance();
+	String[][] valueStrs = d.getDimtypeValueStrArray();
+	List<String> diquStrs =d.getDimtypeValue("发生地区");
+	List<String> didianStrs =d.getDimtypeValue("发生地点");
 
 	//get request parameters from page
 	String lineGraphURL = null;

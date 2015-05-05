@@ -24,15 +24,21 @@
 					<%@ include file="tongjiMenu.jsp"%>
 				</div>
 			</div>
-			<!-- 			<div id="main1"> -->
-			<!-- 				<iframe name="main" scrolling="auto" frameborder="0" -->
-			<!-- 					src="tongji_OnedimTime.jsp"></iframe> -->
-			<!-- 			</div> -->
+<!-- 			<div id="main1"> -->
+<%-- 				<s:if test="frameContent=='onedimTime'"> --%>
+<!-- 					<iframe name="main" scrolling="auto" frameborder="0" -->
+<!-- 						src="tongji_showOnedimTime.action"></iframe> -->
+<%-- 				</s:if> --%>
+<%-- 				<s:elseif test="frameContent=='onedimDiqu'"> --%>
+<!-- 					<iframe name="main" scrolling="auto" frameborder="0" -->
+<!-- 						src="oufa_showOnedimDiqu.action"></iframe> -->
+<%-- 				</s:elseif> --%>
+<!-- 			</div> -->
 			<!-- 			BI版 -->
-			<div id="main1">
-				<iframe name="main" scrolling="auto" frameborder="0"
-					src="http://localhost:9704/analytics/saw.dll?PortalPages&PortalPath=/shared/minhang/_portal/一维频数整体统计&NQUser=weblogic&NQPassword=Admin123"></iframe>
-			</div>
+						<div id="main1">
+							<iframe name="main" scrolling="auto" frameborder="0"
+								src="http://localhost:9704/analytics/saw.dll?PortalPages&PortalPath=/shared/minhang/_portal/一维频数整体统计&NQUser=weblogic&NQPassword=Admin123"></iframe>
+						</div>
 		</div>
 	</div>
 

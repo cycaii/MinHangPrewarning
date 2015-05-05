@@ -1,12 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-      pageEncoding="UTF-8"%>  
+	pageEncoding="UTF-8"%>
 <%-- <%@ page language="java" contentType="text/html; charset=GBK" --%>
 <%-- 	pageEncoding="GBK"%> --%>
+<%@ taglib prefix="s" uri="/struts-tags"%>
 <%@include file="/common/header.jsp"%>
-<%@page
-	import="minhang.dao.*,minhang.service.*,minhang.entity.*,minhang.util.*,minhang.algo.*,java.util.*,org.jfree.chart.*,org.jfree.chart.plot.*,org.jfree.chart.labels.*,
-org.jfree.data.category.*,org.jfree.data.general.DefaultPieDataset,org.jfree.ui.*,org.jfree.chart.renderer.category.BarRenderer3D,
-org.jfree.chart.servlet.*,org.jfree.chart.plot.PlotOrientation,org.jfree.data.general.DatasetUtilities"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -17,82 +14,12 @@ org.jfree.chart.servlet.*,org.jfree.chart.plot.PlotOrientation,org.jfree.data.ge
 
 </head>
 
-<%
-	request.setCharacterEncoding("gbk");
-
-	//get common objects
-	CommonService c = new CommonService();
-	DimtypeDao d = DimtypeDao.getInstance();
-	OnedimstatisticDao od =  OnedimstatisticDao.getInstance();
-	List<String> dimStrs = d.getAllDimtypesStr();
-
-	//获取页面输入参数
-	String dimtype = request.getParameter("dimSelect");
-	String timeSel = request.getParameter("timeSelect");
-	String barGraphURL = null, pieGraphURL = null, lineGraphURL = null;
-	String startYear = null, endYear = null, startNum = null, endNum = null;
-
-	System.out.println("input:dimtype:"+dimtype+"  timeSel:"+timeSel);
-	startYear = request.getParameter("sy_year");
-	endYear = request.getParameter("ey_year");
-	//设置查询条件参数
-	if (timeSel != null) {
-		int sel = Integer.parseInt(timeSel);
-		switch (sel) {
-		case 1:
-	break;
-		case 2:
-	startNum = request.getParameter("sj_jijie");
-	endNum = request.getParameter("ej_jijie");
-	break;
-		case 3:
-	startNum = request.getParameter("ss_season");
-	endNum = request.getParameter("es_season");
-	break;
-		case 4:
-	startNum = request.getParameter("sm_month");
-	endNum = request.getParameter("em_month");
-	break;
-		case 5:
-	startNum = request.getParameter("sx_xun");
-	endNum = request.getParameter("ex_xun");
-	break;
-		case 6:
-	startNum = request.getParameter("sw_week");
-	endNum = request.getParameter("ew_week");
-	break;
-		}
-		
-		System.out.println("input:startYear:"+startYear+"  endYear:"+endYear+"  startNum:"+startNum+"  endNum:"+endNum);
-		//数据处理
-		List<Onedimstatistic> result = c.getOneDimResult(sel,
-		dimtype, null, startYear, endYear, startNum, endNum);
-		//生成直方图
-		JFreeChart chart = c.getOneDimBarChart(dimtype, result);
-		String bfilename = ServletUtilities.saveChartAsPNG(chart, 800,
-		500, null, session);
-		barGraphURL = request.getContextPath()
-		+ "/DisplayChart?filename=" + bfilename;
-		//生成饼状图
-		JFreeChart chart2 = c.getOneDimPieChart(dimtype, result);
-		String pfilename = ServletUtilities.saveChartAsPNG(chart2, 500,
-		500, null, session);
-		pieGraphURL = request.getContextPath()
-		+ "/DisplayChart?filename=" + pfilename;
-		//生成折线图
-		JFreeChart chart3 = c.getOneDimLineChart(dimtype, result);
-		String lfilename = ServletUtilities.saveChartAsPNG(chart3, 800,
-		500, null, session);
-		lineGraphURL = request.getContextPath()
-		+ "/DisplayChart?filename=" + lfilename;
-
-	}
-%>
 <body>
 	<div class="container">
 		<div>
-			<form id="timePinfaForm" action="tongji_OnedimTime.jsp" method="post"
-				onsubmit="return commitCheck()" class="form-horizontal" role="form">
+			<form id="timePinfaForm" action="tongji_showOnedimTime.action"
+				method="post" onsubmit="return commitCheck()"
+				class="form-horizontal" role="form">
 				<div class="form-group">
 					<label for="inputMsg" class="col-sm-2 control-label"> </label> <label
 						style="color: rgb(176, 23, 31)" id="inputMsg"></label>
@@ -101,15 +28,15 @@ org.jfree.chart.servlet.*,org.jfree.chart.plot.PlotOrientation,org.jfree.data.ge
 				<div class="form-group">
 					<label for="dimSelect" class="col-sm-2 control-label">统计维度</label>
 					<div class="col-sm-10">
-						<select name="dimSelect" id="dimSelect"  class="form-control">
+
+						<select name="dimSelect" id="dimSelect" class="form-control">
 							<option value="">选择统计维度</option>
-							<%
-								for (int i = 0; i < dimStrs.size(); i++) {
-							%>
-							<option value=<%=dimStrs.get(i)%>><%=dimStrs.get(i)%></option>
-							<%
-								}
-							%>
+							<s:iterator value="dimStrs" id="dimStr">
+								<option value="<s:property value="dimStr" />"
+									<s:if test="#dimStr==dimSelect">selected="selected"</s:if>>
+									<s:property value="dimStr" />
+								</option>
+							</s:iterator>
 						</select>
 					</div>
 				</div>
@@ -118,7 +45,8 @@ org.jfree.chart.servlet.*,org.jfree.chart.plot.PlotOrientation,org.jfree.data.ge
 					<label for="timeSelect" class="col-sm-2 control-label">统计时间</label>
 					<div class="col-sm-10">
 						<select name="timeSelect" id="timeSelect"
-							onChange="selectTimeValue(this.selectedIndex)" class="form-control">
+							onChange="selectTimeValue(this.selectedIndex)"
+							class="form-control">
 							<option value="0">请选择</option>
 							<option value="1">年度</option>
 							<option value="2">季节</option>
@@ -226,19 +154,26 @@ org.jfree.chart.servlet.*,org.jfree.chart.plot.PlotOrientation,org.jfree.data.ge
 			</form>
 		</div>
 		<div>
-			<%
-				if (barGraphURL != null) {
-			%>
-			<h3>频发统计图</h3>
-			<p>
-				<img src="<%=barGraphURL%>" class="img-rounded"></br> </br> <img
-					src="<%=pieGraphURL%>"  class="img-rounded"></br> </br> <img
-					src="<%=lineGraphURL%>" class="img-rounded">
-<!-- 					width=800 height=500 border=0 -->
-			</p>
-			<%
-				}
-			%>
+
+			<s:if test="msg!=null">
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-10">
+						<p>
+							<s:property value="msg" />
+						</p>
+					</div>
+				</div>
+			</s:if>
+			<s:elseif
+				test="barGraphURL != null && pieGraphURL!= null &&lineGraphURL!= null">
+				<h3>频发统计图</h3>
+				<p>
+					<img src="<s:property value="barGraphURL" />" class="img-rounded"></br>
+					</br> <img src="<s:property value="pieGraphURL" />" class="img-rounded"></br>
+					</br> <img src="<s:property value="lineGraphURL" />" class="img-rounded">
+					<!-- 					width=800 height=500 border=0 -->
+				</p>
+			</s:elseif>
 		</div>
 	</div>
 </body>
@@ -305,14 +240,14 @@ org.jfree.chart.servlet.*,org.jfree.chart.plot.PlotOrientation,org.jfree.data.ge
 		// 		$("#inputMsg").text("请输入数字 ");
 		return false;
 	}
-	 
+
 	/**
 	 * 表单提交 检查 
 	 */
 	function commitCheck() {
 		var dimsel = $("#dimSelect").find("option:selected").val();
 		var timesel = $("#timeSelect").find("option:selected").val();
-// 		alert("dimsel:" + dimsel + " timesel: " + timesel);
+		// 		alert("dimsel:" + dimsel + " timesel: " + timesel);
 		if (dimsel == "") {
 			$("#inputMsg").text("请选择统计维度 ");
 			return false;

@@ -9,10 +9,10 @@
 <!-- </h1> -->
 <!-- <span class="no"> -->
 <!-- 	<h2> -->
-<!-- 		<a href="tongji_OnedimTime.jsp" target="main"> 时间维度分析</a> -->
+<!-- 		<a href="tongji_showOnedimTime.action" target="main"> 时间维度分析</a> -->
 <!-- 	</h2> -->
 <!-- 	<h2> -->
-<!-- 		<a href="tongji_OnedimDiqu.jsp" target="main"> 空间维度分析</a> -->
+<!-- 		<a href="tongji_showOnedimDiqu.action" target="main"> 空间维度分析</a> -->
 <!-- 	</h2> -->
 <!-- 	<h2> -->
 <!-- 		<a href="#"> 一维统计分析</a> -->

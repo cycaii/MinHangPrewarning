@@ -60,7 +60,8 @@ public class OnedimstatisticDao {
 				o.setYear(Integer.parseInt(rs.getString("yearnum")));
 				o.setCount(Integer.parseInt(rs.getString("countnum")));
 				o.setAccording(rs.getString("according"));
-				o.setNum(Integer.parseInt(rs.getString("num")));
+				int num = rs.getString("num")==null?0:Integer.parseInt(rs.getString("num"));
+				o.setNum(num);
 				results.add(o);
 			}
 			rs.close();
